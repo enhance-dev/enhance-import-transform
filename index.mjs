@@ -3,11 +3,11 @@ import { parse } from 'acorn'
 import { generate } from 'escodegen'
 const MODULES_REGEX = /^\/_modules\//
 
-console.log('importMap', importMap)
 const parseOptions = {
   sourceType: 'module',
   ecmaVersion: 6,
 }
+
 const generateOptions = {
   format: {
     semicolons: false
