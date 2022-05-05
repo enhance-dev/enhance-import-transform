@@ -5,10 +5,10 @@ const removeSync = fs.removeSync
 
 async function setup() {
   try {
-    await removeSync('./node_modules/@architect/importmap.mjs')
+    removeSync('./node_modules/@architect/views/bundles/_map.mjs')
     copySync(
-      './test/fixtures/node_modules/@architect',
-      './node_modules/@architect'
+      './test/fixtures/',
+      './node_modules/'
     )
   }
   catch(error) {

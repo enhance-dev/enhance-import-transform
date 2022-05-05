@@ -7,8 +7,8 @@ test('should exist', t => {
 })
 
 test('should transform import', t => {
-  const raw = `import thing from '/_modules/thing.mjs'`
-  const expected = `import thing from '/_modules/thing-j2kfun4.mjs'`
+  const raw = `import thing from '/_bundles/thing.mjs'`
+  const expected = `import thing from '/_bundles/thing-454fe88.mjs'`
   const actual = importTransform({ raw })
   t.equal(actual, expected, 'Import transformed')
   t.end()

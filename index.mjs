@@ -1,7 +1,7 @@
-import importMap from '@architect/importmap'
+import importMap from '@architect/views/bundles/_map.mjs'
 import { parse } from 'acorn'
 import { generate } from 'escodegen'
-const MODULES_REGEX = /^\/_modules\//
+const BUNDLES_REGEX = /^\/_bundles\//
 
 const parseOptions = {
   sourceType: 'module',
@@ -18,7 +18,8 @@ export default function importTransform({ raw }) {
   const parsed = parse(raw, parseOptions)
   const body = parsed.body || []
   body.forEach(node => {
-    if(MODULES_REGEX.test(node.source.value)) {
+    if(node.type === 'ImportDeclaration' &&
+       BUNDLES_REGEX.test(node.source.value)) {
       node.source.value = importMap[node.source.value]
     }
   })
