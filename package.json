@@ -1,6 +1,6 @@
 {
   "name": "enhance-import-transform",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Transform that rerwrites import paths",
   "engines": {
     "node": ">=14.0.0"
