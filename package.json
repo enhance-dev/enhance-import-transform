@@ -1,16 +1,14 @@
 {
-  "name": "enhance-import-transform",
-  "version": "0.0.1",
-  "description": "Transform that rerwrites import paths",
+  "name": "@enhance/import-transform",
+  "version": "0.0.0",
+  "description": "Transform that rerwrites import paths for fingerprinted bundles",
   "engines": {
     "node": ">=14.0.0"
   },
   "type": "module",
   "main": "index.mjs",
   "scripts": {
-    "copy": "./scripts/copy-importmap.mjs",
-    "tape": "tape-es ./test/test.mjs | tap-arc",
-    "test": "run-s copy tape"
+    "test": "tape-es ./test/test.mjs | tap-arc"
   },
   "repository": {
     "type": "git",
@@ -24,7 +22,6 @@
   },
   "homepage": "https://github.com/enhance-dev/enhance-import-transform#readme",
   "devDependencies": {
-    "fs-extra": "^10.1.0",
     "npm-run-all": "^4.1.5",
     "tap-arc": "^0.3.4",
     "tape-es": "^1.2.17"
