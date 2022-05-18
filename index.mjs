@@ -4,7 +4,7 @@ const BUNDLES_REGEX = /^\/_bundles\//
 
 const parseOptions = {
   sourceType: 'module',
-  ecmaVersion: 6,
+  ecmaVersion: 'latest',
 }
 
 const generateOptions = {
