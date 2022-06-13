@@ -1,29 +1,15 @@
-import { parse } from 'acorn'
-import { generate } from 'escodegen'
-const BUNDLES_REGEX = /^\/_bundles\//
-
-const parseOptions = {
-  sourceType: 'module',
-  ecmaVersion: 'latest',
-}
-
-const generateOptions = {
-  format: {
-    semicolons: false
-  }
-}
-
-export default function importTransform({ map={}, options={} }) {
-  const { generateOpts=generateOptions, parseOpts=parseOptions } = options
+export default function importTransform({ map={} }) {
   return function transform({ raw }) {
-    const parsed = parse(raw, parseOpts)
-    const body = parsed.body || []
-    body.forEach(node => {
-      if(node.type === 'ImportDeclaration' &&
-        BUNDLES_REGEX.test(node.source.value)) {
-        node.source.value =  map[node.source.value]
-      }
-    })
-    return generate(parsed, generateOpts)
+    const importRegex = new RegExp(
+      /(import(?:["'\s]*([\w*${}\n\r\t, ]+)from\s*)?["'\s]["'\s])(\/_bundles\/.*[@\w_-]+)(["'\s].*;?$)/,
+      'gm'
+    )
+    let str = raw.replace(
+      importRegex,
+      (str, before, importName, location, after) =>
+        `${before}${map[location]}${after}`
+    )
+    str = str.replace(/__WORKER_SCRIPT_URL__/g, map['/_bundles/worker.mjs'])
+    return str
   }
 }

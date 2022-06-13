@@ -1,1 +1,0 @@
-export default { '/_bundles/thing.mjs': '/_bundles/thing-454fe88.mjs' }
