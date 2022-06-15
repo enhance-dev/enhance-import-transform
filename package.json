@@ -22,8 +22,13 @@
   },
   "homepage": "https://github.com/enhance-dev/enhance-import-transform#readme",
   "devDependencies": {
+    "@architect/sandbox": "^5.2.5",
     "npm-run-all": "^4.1.5",
     "tap-arc": "^0.3.4",
-    "tape-es": "^1.2.17"
+    "tape-es": "^1.2.17",
+    "tiny-json-http": "^7.4.2"
+  },
+  "dependencies": {
+    "@architect/functions": "^5.1.0"
   }
 }

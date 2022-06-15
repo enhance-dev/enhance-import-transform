@@ -1,18 +1,32 @@
+import { join } from 'path'
 import test from 'tape'
-import importTransform from '../index.mjs'
+import { get } from 'tiny-json-http'
+import sandbox from '@architect/sandbox'
+const workingDirectory = join(process.cwd(), 'test', 'mock')
+const port = 6661
+const url = (path, port) => `http://localhost:${port}${path}`
 
-const map = { '/_bundles/thing.mjs': '/_bundles/thing-454fe88.mjs' }
-
-test('should exist', t => {
-  t.ok(importTransform)
-  t.end()
+test('Start sandbox', async t => {
+  t.plan(1)
+  await sandbox.start({
+    cwd: workingDirectory,
+    port
+  })
+  t.pass('Sandbox started')
 })
 
-test('should transform import', t => {
-  const raw = `import thing from '/_bundles/thing.mjs'`
-  const expected = `import thing from '/_bundles/thing-454fe88.mjs'`
-  const transform = importTransform({ map })
-  const actual = transform({ raw })
-  t.equal(actual, expected, 'Import transformed')
-  t.end()
+test('Get file via fingerprinted url', async t => {
+  t.plan(1)
+  const fileReq = await get({
+    url: url('/', port),
+    port
+  })
+  const filePath = fileReq.body
+  t.ok(filePath, `Got fingerprinted url ${filePath}` )
+})
+
+test('Shut down Sandbox', async t => {
+  t.plan(1)
+  await sandbox.end()
+  t.pass('Shut down Sandbox')
 })
