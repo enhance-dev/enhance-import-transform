@@ -3,8 +3,14 @@ import arc from '@architect/functions'
 import importTransform from '../../../../../index.mjs'
 
 export async function handler (req) {
-  const raw = `import yolo from '/_static/bundles/yolo.mjs'`
-  const transform = importTransform({ lookup: arc.static })
+  const raw = `
+  import yolo from '/_static/bundles/yolo.mjs'
+  const workerURL = '__API_WORKER__'
+  `
+  const transform = importTransform({
+    lookup: arc.static,
+    workers: [{ label: '__API_WORKER__', path: '/_static/worker.mjs' }]
+  })
   const output = transform({ raw })
 
   return {

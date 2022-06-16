@@ -25,6 +25,17 @@ test('Get file via fingerprinted url', async t => {
   t.ok(filePath, `Got fingerprinted url ${filePath}` )
 })
 
+
+test('should look up worker', async t => {
+  t.plan(1)
+  const fileReq = await get({
+    url: url('/', port),
+    port
+  })
+  const filePath = fileReq.body
+  t.ok(filePath, `Got fingerprinted url ${filePath}` )
+})
+
 test('Shut down Sandbox', async t => {
   t.plan(1)
   await sandbox.end()
