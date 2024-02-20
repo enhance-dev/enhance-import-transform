@@ -29,6 +29,6 @@
     "tiny-json-http": "^7.4.2"
   },
   "dependencies": {
-    "@architect/functions": "^5.1.0"
+    "@architect/functions": "^8.0.4"
   }
 }
